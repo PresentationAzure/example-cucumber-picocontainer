@@ -9,17 +9,19 @@ import javax.inject.Inject;
 import org.testng.Assert;
 import java.util.Objects;
 
-public class CustomerSteps {
+// For the example we can divide all steps definitions in three classes that are "Client Classes".
+// The Dependency Injection (DI) is possible using Cucumber-PicoContainer, all "Client Classes" depend of base class.
+// The injected "base" class is shared with all three Step Definition classes.
+public class CustomerActionsAndResultSteps {
 
+    // We also used an alternative Method for inject dependency using annotation.
     private Base base;
-    /*
-     * Alternative Method for inject dependency using annotation.
-    */
     @Inject
-    public CustomerSteps(final Base base ) {
+    public CustomerActionsAndResultSteps(final Base base ) {
         this.base = Objects.requireNonNull( base, "appService must not be null" );
     }
 
+    // So we have the When and Then step definitions
     @When("she return the {string} to the store")
     public void return_the_an_item_to_the_store(final String itemType) throws Throwable {
         Item expectedItem = new Item(itemType);
@@ -33,6 +35,7 @@ public class CustomerSteps {
 
     @Then("she will get ${int} refunded")
     public void sheWillGet$Refunded(final int refunded) {
-        System.out.printf("she will get $%d refunded", base.customer.getRefunded());
+        System.out.printf("TRANSACTION: She will get $%d refunded", base.customer.getRefunded());
+        System.out.println();
     }
 }
