@@ -12,8 +12,10 @@ public class GoodSteps {
         this.base = base;
     }
 
-    @Given("^that (.*) bought a faulty (.*) for \\$(\\d+)$")
-    public void that_bought_a_faulty_kettle(final String name, final String itemType, final int price) throws Throwable {
+    @Given("that {string} bought a faulty {string} for ${int}")
+    public void that_bought_a_faulty_kettle(String name, String itemType, int price) throws Throwable {
+        System.out.println(name);
+        System.out.println(itemType);
         base.customer = new Customer(name);
         base.item = new Item(itemType, price);
     }
