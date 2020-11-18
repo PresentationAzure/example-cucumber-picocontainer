@@ -15,4 +15,7 @@ public class Customer {
   public int getRefunded() {
     return this.refund;
   }
+  public String getName() {
+    return this.name;
+  }
 }
