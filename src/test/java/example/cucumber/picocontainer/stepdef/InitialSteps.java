@@ -4,11 +4,12 @@ import example.cucumber.picocontainer.model.Customer;
 import example.cucumber.picocontainer.model.Item;
 import io.cucumber.java.en.Given;
 
-public class GoodSteps {
+// This is another "Client class" that depends of base class.
+public class InitialSteps {
 
+    //The main method to apply DI is using constructors named as Constructor Dependency Injection (CDI).
     private Base base;
-
-    public GoodSteps(final Base base) {
+    public InitialSteps(final Base base) {
         this.base = base;
     }
 

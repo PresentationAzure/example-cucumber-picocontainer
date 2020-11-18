@@ -7,3 +7,4 @@ Feature: Refund faulty items
     When she return the "kettle" to the store
     And she show her receipt
     Then she will get $100 refunded
+
