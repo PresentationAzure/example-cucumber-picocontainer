@@ -2,19 +2,37 @@ plugins {
     id 'java'
     id 'application'
 }
+group 'example-cucumber-picocontainer'
+version '1.0'
 
 repositories {
     mavenCentral()
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
 dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
-    testImplementation group: 'org.testng', name: 'testng', version: '7.3.0'
-    testCompile group: 'io.cucumber', name: 'cucumber-java', version: '2.4.0'
-    testCompile group: 'io.cucumber', name: 'cucumber-testng', version: '2.4.0'
-    testCompile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '2.4.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-java', version: '6.8.1'
+    testCompile group: 'io.cucumber', name: 'cucumber-testng', version: '6.8.1'
+    testCompile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '6.8.1'
 }
 
 application {
     mainClassName = 'example.cucumber.picocontainer.App'
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'example.cucumber.picocontainer', 'src/test/resources/features']
+        }
+    }
 }
