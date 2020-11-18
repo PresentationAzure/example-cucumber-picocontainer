@@ -25,3 +25,14 @@ dependencies {
 application {
     mainClassName = 'example.cucumber.picocontainer.App'
 }
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'example.cucumber.picocontainer', 'src/test/resources/features']
+        }
+    }
+}
