@@ -2,8 +2,9 @@ plugins {
     id 'java'
     id 'application'
 }
-group 'example-cucumber-picocontainer'
+group 'example.cucumber-picocontainer'
 version '1.0'
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
